@@ -4,12 +4,19 @@
   "description": "",
   "main": "src/index.ts",
   "scripts": {
+    "prepare": "husky install",
     "start": "node build/index.js",
     "dev": "ts-node-dev --respawn src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rimraf ./build && tsc",
     "lint": "eslint --ignore-path .gitignore --ext .ts .",
     "format": "prettier --ignore-path .gitignore --write 'src/**/*.ts'"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "prettier --ignore-path .gitignore --write",
+      "eslint --ignore-path .gitignore --fix"
+    ]
   },
   "repository": {
     "type": "git",
@@ -28,6 +35,8 @@
     "@typescript-eslint/parser": "^5.55.0",
     "eslint": "^8.36.0",
     "eslint-config-prettier": "^8.7.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.0",
     "prettier": "^2.8.4",
     "rimraf": "^4.4.0",
     "ts-node-dev": "^2.0.0",
