@@ -1,7 +1,10 @@
 # src: https://thecodest.co/blog/quality-first-5-easy-steps-to-lint-your-code-with-github-workflows-in-javascript-project
 name: Code Quality
 
-on: [push]
+on:
+  push:
+    branches:
+      - 'main'
     
 jobs:
   quality-check:
