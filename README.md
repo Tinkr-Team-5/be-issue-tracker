@@ -29,4 +29,4 @@
 - _List any features planned_
 
 ## Socials
-- _List contributors and their social links, if any_
+- _List contributors and their social links, if any_ 
