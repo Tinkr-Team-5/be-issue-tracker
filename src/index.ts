@@ -12,5 +12,3 @@ const main = async () => {
 };
 
 main();
-
-let dog = "woof"
