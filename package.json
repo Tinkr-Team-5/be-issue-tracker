@@ -10,7 +10,8 @@
     "test": "cross-env NODE_ENV=test jest --verbose --runInBand",
     "build": "rimraf ./build && tsc",
     "lint": "eslint --ignore-path .gitignore --ext .ts .",
-    "format": "prettier --ignore-path .gitignore --write 'src/**/*.ts'"
+    "format": "prettier --ignore-path .gitignore --write 'src/**/*.ts'",
+    "lint-staged": "lint-staged"
   },
   "lint-staged": {
     "*.ts": [
