@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import "express-async-errors";
+
 import { httpLogger, errorHandler, unknownEndpoint } from "./middleware";
 import router from "./router";
 import * as env from "../env";

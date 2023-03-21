@@ -1,0 +1,160 @@
+openapi: 3.0.3
+info:
+  title: Issue Tracker
+  description: |-
+    API documentation for Issue-Tracker backend
+  version: 1.0.0
+tags:
+  - name: ticket
+    description: General ticket operations
+  - name: single ticket
+    description: Operations on single ticket
+paths:
+  /ticket:
+    get:
+      tags: 
+        - ticket
+      summary: Returns a list of tickets.
+      description: View all tickets
+      responses:
+        '200':    # status code
+          description: A JSON array of tickets
+          content:
+            application/json:
+              schema: 
+                type: array
+                items: 
+                  $ref: '#/components/schemas/Ticket'
+    post:
+      tags:
+        - ticket
+      summary: Add new ticket to ticket board
+      description: Add new ticket to ticket board
+      requestBody:
+        description: Create new ticket
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TicketDTO'
+        required: true
+      responses:
+        '201':
+          description: Successful ticket creation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ticket'
+        '400':
+          description: Invalid ticket data
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Invalid ticket data
+  /ticket/{ticketId}:
+    get:
+      tags: 
+        - single ticket
+      summary: Get ticket by id
+      description: View single ticket
+      parameters:
+        - name: ticketId
+          in: path
+          description: ID of ticket
+          required: true
+          schema:
+            type: string
+            format: ObjectID
+      responses:
+        '200':
+          description: Single ticket returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ticket'
+    put:
+      tags:
+        - single ticket
+      summary: Update ticket by id
+      description: Update single ticket
+      parameters:
+        - name: ticketId
+          in: path
+          description: ID of ticket
+          required: true
+          schema:
+            type: string
+            format: ObjectID
+      responses:
+        '200':
+          description: Single ticket updated & returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ticket'
+        '400':
+          description: Failed ticket creation or update
+          content:
+            application/json:
+              schema:
+                type: string
+                example: 'Invalid Id or data'
+    delete:
+      tags: 
+        - single ticket
+      summary: Delete ticket by id
+      description: Delete single ticket
+      parameters:
+        - name: ticketId
+          in: path
+          description: ID of ticket
+          required: true
+          schema:
+            type: string
+            format: ObjectID
+      responses:
+        '204':
+          description: Single ticket sucessfully deleted
+        '404':
+          description: Ticket not found
+          content:
+            application/json:
+              schema:
+                type: string
+                example: 'Ticket not found'
+components:
+  schemas:
+    TicketDTO:
+      type: object
+      properties:
+        ticketNumber:
+          type: integer
+          example: 1
+        subject:
+          type: string
+          example: "Ticket descriptor"
+        description:
+          type: string
+          example: "Ticket body"
+        emailAddress:
+          type: string
+          example: "john@email.com"
+        name:
+          type: string
+          example: "John Doe"
+        creationDate:
+          type: string
+          format: date-time
+          example: "2012-05-23T18:25:43.511Z"
+        editDate:
+          type: string
+          format: date-time
+          example: "2012-05-23T18:25:43.511Z"
+    Ticket:
+      allOf:
+        - $ref: '#/components/schemas/TicketDTO'
+        - type: object
+          properties:
+            id:
+              type: string
+              example: "507f1f77bcf86cd799439011"
